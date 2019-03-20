@@ -35,10 +35,10 @@ public class Patient implements Comparable<Patient> {
 
     @Override
     public String toString() {
-        return firstName + ' ' + lastName + '\n'
-                + "Anger level: " + angerLevel + '\n'
-                + "Disease name: " + disease.name() + '\n'
-                + "Disease contagiousness: " + disease.getContagiousness();
+        return firstName + ' ' + lastName + ": "
+                + "Anger: " + angerLevel + ", "
+                + "Disease: " + disease.name() + ", "
+                + "Contagiousness: " + disease.getContagiousness();
     }
 
     public String getFirstName() {
