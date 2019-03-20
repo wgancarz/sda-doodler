@@ -1,11 +1,7 @@
 package hospital;
 
 import hospital.menu.Menu;
-import hospital.model.Disease;
-import hospital.model.Patient;
 import hospital.service.HospitalQueueService;
-
-import java.util.Scanner;
 
 public class Main {
 
