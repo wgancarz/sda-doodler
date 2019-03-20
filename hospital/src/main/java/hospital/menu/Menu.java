@@ -7,21 +7,36 @@ import hospital.service.HospitalQueueService;
 import java.util.Scanner;
 
 public class Menu {
-    private static Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
-    public static Disease diseaseSelectorMenu(){
+    public void mainMenu(HospitalQueueService hospitalQueueService) {
+        while (true) {
+            System.out.println("[1] Poll next patient");
+            System.out.println("[2] Peek next patient");
+            System.out.println("[3] Add a new patient");
+            System.out.println("[0] Quit");
 
-        System.out.println("Available diseases:");
-        for (Disease disease : Disease.values()){
-            System.out.println(disease.name());
+            while (!scanner.hasNextInt()) {
+                scanner.next();
+            }
+
+            switch (scanner.nextInt()) {
+                case 1:
+                    pollNextPatientMenu(hospitalQueueService);
+                    break;
+                case 2:
+                    peekNextPatientMenu(hospitalQueueService);
+                    break;
+                case 3:
+                    addNewPatientMenu(hospitalQueueService);
+                    break;
+                case 0:
+                    return;
+            }
         }
-
-        // TODO: handle incorrect ENUM input
-        Disease disease = Disease.valueOf(scanner.next());
-        return disease;
     }
 
-    public static Patient newPatientMenu() {
+    private void addNewPatientMenu(HospitalQueueService hospitalQueueService) {
         Patient patient = new Patient();
 
         System.out.println("Creating a new patient...");
@@ -33,38 +48,47 @@ public class Menu {
         patient.setLastName(scanner.next());
 
         System.out.println("Enter patient's anger level:");
+        while (!scanner.hasNextInt()) {
+            scanner.next();
+        }
         patient.setAngerLevel(scanner.nextInt());
 
         System.out.println("Select patient's disease:");
-        patient.setDisease(diseaseSelectorMenu());
+        diseaseSelectorMenu(patient);
 
-        return patient;
+        hospitalQueueService.add(patient);
     }
 
-    public static void mainMenu(HospitalQueueService hospitalQueueService) {
-        while (true) {
-            System.out.println("[1] Poll next patient");
-            System.out.println("[2] Peek next patient");
-            System.out.println("[3] Add a new patient");
-            System.out.println("[0] Quit");
+    private void peekNextPatientMenu(HospitalQueueService hospitalQueueService) {
+        System.out.println("The next patient in the queue:");
+        System.out.println(hospitalQueueService.peek());
+    }
 
-            switch (scanner.nextInt()) {
-                case 1:
-                    System.out.print("Removing the patient from the head of the queue: ");
-                    System.out.println(hospitalQueueService.next());
-                    System.out.println("The patient has been removed from the queue.");
-                    break;
-                case 2:
-                    System.out.println(hospitalQueueService.peek());
-                    break;
-                case 3:
-                    hospitalQueueService.add(newPatientMenu());
-                    break;
-                case 0:
-                    return;
-                default:
-                    System.out.println("Incorrect input.");
+    private void pollNextPatientMenu(HospitalQueueService hospitalQueueService) {
+        System.out.println("The next patient in the queue:");
+        System.out.println(hospitalQueueService.next());
+        System.out.println("Removed the next patient from the queue.");
+    }
+
+    private void diseaseSelectorMenu(Patient patient) {
+        int diseaseId;
+
+        while (true) {
+            System.out.println("Available diseases:");
+            for (Disease disease : Disease.values()) {
+                System.out.println("[" + disease.ordinal() + "] " + disease.name());
             }
+
+            while (!scanner.hasNextInt()) {
+                scanner.next();
+            }
+
+            diseaseId = scanner.nextInt();
+            if (diseaseId >= 0 && diseaseId < Disease.values().length)
+                break;
         }
+
+        Disease disease = Disease.values()[diseaseId];
+        patient.setDisease(disease);
     }
 }
