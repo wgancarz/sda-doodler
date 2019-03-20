@@ -9,7 +9,13 @@ import java.util.Scanner;
 public class Menu {
     private Scanner scanner = new Scanner(System.in);
 
-    public void mainMenu(HospitalQueueService hospitalQueueService) {
+    private HospitalQueueService hospitalQueueService;
+
+    public Menu(HospitalQueueService hospitalQueueService){
+        this.hospitalQueueService = hospitalQueueService;
+    }
+
+    public void mainMenu() {
         while (true) {
             System.out.println("[1] Poll next patient");
             System.out.println("[2] Peek next patient");
@@ -22,13 +28,13 @@ public class Menu {
 
             switch (scanner.nextInt()) {
                 case 1:
-                    pollNextPatientMenu(hospitalQueueService);
+                    pollNextPatientMenu();
                     break;
                 case 2:
-                    peekNextPatientMenu(hospitalQueueService);
+                    peekNextPatientMenu();
                     break;
                 case 3:
-                    addNewPatientMenu(hospitalQueueService);
+                    addNewPatientMenu();
                     break;
                 case 0:
                     return;
@@ -36,7 +42,7 @@ public class Menu {
         }
     }
 
-    private void addNewPatientMenu(HospitalQueueService hospitalQueueService) {
+    private void addNewPatientMenu() {
         Patient patient = new Patient();
 
         System.out.println("Creating a new patient...");
@@ -59,12 +65,12 @@ public class Menu {
         hospitalQueueService.add(patient);
     }
 
-    private void peekNextPatientMenu(HospitalQueueService hospitalQueueService) {
+    private void peekNextPatientMenu() {
         System.out.println("The next patient in the queue:");
         System.out.println(hospitalQueueService.peek());
     }
 
-    private void pollNextPatientMenu(HospitalQueueService hospitalQueueService) {
+    private void pollNextPatientMenu() {
         System.out.println("The next patient in the queue:");
         System.out.println(hospitalQueueService.next());
         System.out.println("Removed the next patient from the queue.");

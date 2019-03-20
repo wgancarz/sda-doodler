@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         HospitalQueueService hospitalQueueService = new HospitalQueueService();
 
-        Menu menu = new Menu();
-        menu.mainMenu(hospitalQueueService);
+        Menu menu = new Menu(hospitalQueueService);
+        menu.mainMenu();
     }
 }
