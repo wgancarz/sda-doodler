@@ -7,16 +7,30 @@ public class Patient implements Comparable<Patient> {
     Disease disease;
 
     private int getPriority() {
-        if (this.lastName.equalsIgnoreCase("Kowalski")) {
-            return Integer.MIN_VALUE;
-        } else {
-            return angerLevel * disease.getContagiousness();
-        }
+        return angerLevel * disease.getContagiousness();
     }
 
     @Override
     public int compareTo(Patient otherPatient) {
-        return Integer.compare(this.getPriority(), otherPatient.getPriority());
+        final String PRIORITY_LASTNAME = "Kowalski";
+
+        if ((this.getLastName().equalsIgnoreCase(PRIORITY_LASTNAME))
+                && !(otherPatient.getLastName().equalsIgnoreCase(PRIORITY_LASTNAME))) {
+            return -1;
+        }
+
+        if ((otherPatient.getLastName().equalsIgnoreCase(PRIORITY_LASTNAME))
+                && !(this.getLastName().equalsIgnoreCase(PRIORITY_LASTNAME))) {
+            return 1;
+        }
+
+        if (this.getPriority() > otherPatient.getPriority()) {
+            return -1;
+        } else if (this.getPriority() == otherPatient.getPriority()) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     @Override
