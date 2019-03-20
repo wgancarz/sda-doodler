@@ -7,15 +7,15 @@ import java.util.PriorityQueue;
 public class HospitalQueueService {
     PriorityQueue<Patient> queue = new PriorityQueue<>();
 
-    public void add(Patient patient){
+    public void add(Patient patient) {
         queue.add(patient);
     }
 
-    public Patient peek(){
+    public Patient peek() {
         return queue.peek();
     }
 
-    public Patient next(){
+    public Patient next() {
         return queue.poll();
     }
 
