@@ -17,6 +17,6 @@ public enum Disease {
     }
 
     public String toString(){
-        return this.name() + " " + "(Contagiousness: " + this.getContagiousness() + ")";
+        return name() + " " + "(Contagiousness: " + contagiousness + ")";
     }
 }

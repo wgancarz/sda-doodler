@@ -8,9 +8,13 @@ public class Patient {
 
     @Override
     public String toString() {
-        return firstName + ' ' + lastName + ": "
+        return getFullName() + ": "
                 + "Anger: " + angerLevel + ", "
                 + "Disease: " + disease;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public String getFirstName() {
