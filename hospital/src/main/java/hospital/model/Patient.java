@@ -10,8 +10,7 @@ public class Patient {
     public String toString() {
         return firstName + ' ' + lastName + ": "
                 + "Anger: " + angerLevel + ", "
-                + "Disease: " + disease.name() + ", "
-                + "Contagiousness: " + disease.getContagiousness();
+                + "Disease: " + disease;
     }
 
     public String getFirstName() {
