@@ -82,9 +82,7 @@ public class Menu {
         while (true) {
             System.out.println("Available diseases:");
             for (Disease disease : Disease.values()) {
-                System.out.println("[" + disease.ordinal() + "] "
-                        + disease.name() + " "
-                        + "(Contagiousness: " + disease.getContagiousness() + ")");
+                System.out.println("[" + disease.ordinal() + "] " + disease);
             }
 
             while (!scanner.hasNextInt()) {
