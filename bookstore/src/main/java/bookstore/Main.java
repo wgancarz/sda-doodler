@@ -12,31 +12,45 @@ public class Main {
     public static void main(String[] args) {
         List<Book> books = BookLoader.loadBooks("books.csv");
 
-        // wyjmij liste tytulow ksiazek o pythonie z roku 2016 i starszych
+        List<String> lambdaTitles = getBooksAboutPythonFrom2016OrOlderUsingLambda(books);
+        printBooksUsingLambda(lambdaTitles);
 
-        // LAMBDA
-        List<String> lambdaTitles = books.stream()
+        List<String> forEachTitles = getBooksAboutPythonFrom2016OrOlderUsingForEach(books);
+        printBooksUsingForEach(forEachTitles);
+
+        System.out.println("Are the sets identical? " + lambdaTitles.equals(forEachTitles));
+    }
+
+    private static void printBooksUsingForEach(List<String> forEachTitles) {
+        for (String title : forEachTitles) {
+            System.out.println(title);
+        }
+    }
+
+    private static void printBooksUsingLambda(List<String> lambdaTitles) {
+        lambdaTitles.forEach(System.out::println);
+    }
+
+    private static List<String> getBooksAboutPythonFrom2016OrOlderUsingForEach(List<Book> books) {
+        List<String> titles = new ArrayList<>();
+
+        for (Book book : books) {
+            if (book.getCategory().equalsIgnoreCase("Python")
+                    && (book.getReleaseYear() <= 2016)) {
+                titles.add(book.getTitle());
+            }
+        }
+
+        return titles;
+    }
+
+    private static List<String> getBooksAboutPythonFrom2016OrOlderUsingLambda(List<Book> books) {
+        List<String> titles = books.stream()
                 .filter(b -> b.getCategory().equalsIgnoreCase("Python"))
                 .filter(b -> b.getReleaseYear() <= 2016)
                 .map(b -> b.getTitle())
                 .collect(Collectors.toList());
 
-        lambdaTitles.forEach(System.out::println);
-
-        // FOREACH
-        List<String> forEachTitles = new ArrayList<>();
-        for (Book book : books) {
-            if (book.getCategory().equalsIgnoreCase("Python")
-                    && (book.getReleaseYear() <= 2016)) {
-                forEachTitles.add(book.getTitle());
-            }
-        }
-
-        for (String title : forEachTitles) {
-            System.out.println(title);
-        }
-
-        // sprawdz czy wyszlo to samo
-        System.out.println("IDENTICAL? " + lambdaTitles.equals(forEachTitles));
+        return titles;
     }
 }
