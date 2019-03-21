@@ -77,26 +77,26 @@ public class Menu {
     }
 
     private void diseaseSelectorMenu(Patient patient) {
-        int diseaseId;
+        int diseaseOrdinal;
 
         while (true) {
             System.out.println("Available diseases:");
             for (Disease disease : Disease.values()) {
                 System.out.println("[" + disease.ordinal() + "] "
-                        + disease.name()
-                        + " (Contagiousness: " + disease.getContagiousness() + ")");
+                        + disease.name() + " "
+                        + "(Contagiousness: " + disease.getContagiousness() + ")");
             }
 
             while (!scanner.hasNextInt()) {
                 scanner.next();
             }
 
-            diseaseId = scanner.nextInt();
-            if (diseaseId >= 0 && diseaseId < Disease.values().length)
+            diseaseOrdinal = scanner.nextInt();
+            if (diseaseOrdinal >= 0 && diseaseOrdinal < Disease.values().length)
                 break;
         }
 
-        Disease disease = Disease.values()[diseaseId];
+        Disease disease = Disease.values()[diseaseOrdinal];
         patient.setDisease(disease);
     }
 }
