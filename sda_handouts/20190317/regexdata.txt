@@ -1,0 +1,25 @@
+
+    private final static String METEO_STRING = "Poniedzialek;15C wiatr wschod mocny\n" +
+            "Wtorek}16C wiatr zachod mocny\n" +
+            "Sroda[15C wiatr brak brak\n" +
+            "Czwartek!9C wiatr polnoc sredni\n";
+
+    private final static List<String> TAXI_STRINGS = Arrays.asList("Poprosze taksowke na Dworzec",
+            "Taksowka pod Galerie szybko",
+            "Gdzie ta taksowka?Miala byc 30 minut temu na Sokolskiej",
+            "Platnosc karta za 3 minuty w Supersamie dziekuje");
+
+    private final static String NUMBERS_WITH_SOME_SELECTORS = "1;2/3:4#5$63@1^3^8$21";
+
+    private final static List<String> FILENAMES = Arrays.asList("alamakota.txt", "log-12-02-2019.txt", "fotkizwakacji.jpg", "memy.png", "smiesznekoty.gif", "wirus.exe", "innyplik.java", "nienazywajtakklas.java", "krytyczne-11-03-2018.log");
+
+
+private final static String SOME_CODE = "private int i = 0;\n" +
+            "public String abc = \"aaa\";\n" +
+            "protected float mojaMetoda() {\n" +
+            "\n" +
+            "}\n" +
+            "public double jakasZmienna = 2.3d;";
+
+    public void run() {
+        System.out.println(METEO_STRING);
