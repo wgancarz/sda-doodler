@@ -11,7 +11,7 @@ public class Menu {
 
     private HospitalQueueService hospitalQueueService;
 
-    public Menu(HospitalQueueService hospitalQueueService){
+    public Menu(HospitalQueueService hospitalQueueService) {
         this.hospitalQueueService = hospitalQueueService;
     }
 
@@ -43,9 +43,17 @@ public class Menu {
     }
 
     private void addNewPatientMenu() {
-        Patient patient = new Patient();
-
         System.out.println("Creating a new patient...");
+        Patient patient = patientCreatorMenu();
+
+        System.out.println("Adding patient to queue:");
+        System.out.println(patient);
+
+        hospitalQueueService.add(patient);
+    }
+
+    private Patient patientCreatorMenu() {
+        Patient patient = new Patient();
 
         System.out.println("Enter patient's first name:");
         patient.setFirstName(scanner.next());
@@ -60,9 +68,10 @@ public class Menu {
         patient.setAngerLevel(scanner.nextInt());
 
         System.out.println("Select patient's disease:");
-        diseaseSelectorMenu(patient);
+        Disease disease = diseaseSelectorMenu();
+        patient.setDisease(disease);
 
-        hospitalQueueService.add(patient);
+        return patient;
     }
 
     private void peekNextPatientMenu() {
@@ -76,7 +85,7 @@ public class Menu {
         System.out.println("Removed the next patient from the queue.");
     }
 
-    private void diseaseSelectorMenu(Patient patient) {
+    private Disease diseaseSelectorMenu() {
         int diseaseOrdinal;
 
         while (true) {
@@ -95,6 +104,6 @@ public class Menu {
         }
 
         Disease disease = Disease.values()[diseaseOrdinal];
-        patient.setDisease(disease);
+        return disease;
     }
 }
