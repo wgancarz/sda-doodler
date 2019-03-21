@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        List<Book> books = BookLoader.loadBooks("/Users/i323626/Downloads/BookApp/dane.txt");
+        List<Book> books = BookLoader.loadBooks("books.csv");
 
         // wyjmij liste tytulow ksiazek o pythonie z roku 2016 i starszych
 

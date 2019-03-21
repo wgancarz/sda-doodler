@@ -3,16 +3,28 @@ package bookstore.loader;
 import bookstore.model.Book;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookLoader {
 
-    public static List<Book> loadBooks(String pathString) {
-        return loadBooks(Paths.get(pathString));
+    public static List<Book> loadBooks(String resourceName) {
+        Path path;
+
+        try {
+            path = Paths.get(BookLoader.class.getClassLoader().getResource(resourceName).toURI());
+        } catch (URISyntaxException e) {
+            System.err.println("Incorrect file path.");
+            e.printStackTrace();
+            return null;
+        }
+
+        return loadBooks(path);
     }
 
     public static List<Book> loadBooks(Path path) {
@@ -21,8 +33,9 @@ public class BookLoader {
         try {
             Files.lines(path).forEach(line -> books.add(parseBook(line)));
         } catch (IOException e) {
-            System.err.println("Error reading input file.");
+            System.err.println("I/O error during opening of input file.");
             e.printStackTrace();
+            return null;
         }
 
         return books;
