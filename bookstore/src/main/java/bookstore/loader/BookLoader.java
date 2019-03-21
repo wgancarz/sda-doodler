@@ -30,6 +30,7 @@ public class BookLoader {
 
     public static Book parseBook(String data) {
         String[] array = data.split(";");
+        Arrays.setAll(array, i -> array[i].trim());
 
         String title = array[0];
         String author = array[1];
