@@ -1,4 +1,4 @@
-package hospital.demo;
+package hospital.model.generator;
 
 import hospital.model.Disease;
 import hospital.model.Patient;

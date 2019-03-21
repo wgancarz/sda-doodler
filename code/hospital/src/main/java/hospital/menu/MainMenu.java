@@ -1,7 +1,7 @@
 package hospital.menu;
 
-import hospital.demo.PatientGenerator;
 import hospital.model.Patient;
+import hospital.model.generator.PatientGenerator;
 import hospital.service.HospitalQueueService;
 
 import java.util.Scanner;
