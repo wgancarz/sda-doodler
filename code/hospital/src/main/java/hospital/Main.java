@@ -1,6 +1,6 @@
 package hospital;
 
-import hospital.menu.Menu;
+import hospital.menu.MainMenu;
 import hospital.service.HospitalQueueService;
 
 public class Main {
@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         HospitalQueueService hospitalQueueService = new HospitalQueueService();
 
-        Menu menu = new Menu(hospitalQueueService);
-        menu.mainMenu();
+        MainMenu mainMenu = new MainMenu(hospitalQueueService);
+        mainMenu.mainMenu();
     }
 }
