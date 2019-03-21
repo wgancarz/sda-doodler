@@ -6,6 +6,16 @@ public class Patient {
     Integer angerLevel;
     Disease disease;
 
+    public Patient() {
+    }
+
+    public Patient(String firstName, String lastName, Integer angerLevel, Disease disease) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.angerLevel = angerLevel;
+        this.disease = disease;
+    }
+
     @Override
     public String toString() {
         return getFullName() + ": "
