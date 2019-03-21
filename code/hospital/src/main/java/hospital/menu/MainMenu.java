@@ -1,13 +1,16 @@
 package hospital.menu;
 
+import hospital.demo.PatientGenerator;
+import hospital.model.Patient;
 import hospital.service.HospitalQueueService;
 
 import java.util.Scanner;
 
 public class MainMenu {
-    private Scanner scanner = new Scanner(System.in);
-
     private HospitalQueueService hospitalQueueService;
+
+    private PatientGenerator patientGenerator = new PatientGenerator();
+    private Scanner scanner = new Scanner(System.in);
 
     public MainMenu(HospitalQueueService hospitalQueueService) {
         this.hospitalQueueService = hospitalQueueService;
@@ -17,7 +20,8 @@ public class MainMenu {
         while (true) {
             System.out.println("[1] Poll next patient");
             System.out.println("[2] Peek next patient");
-            System.out.println("[3] Add a new patient");
+            System.out.println("[3] Add a random patient");
+            System.out.println("[4] Add a custom patient");
             System.out.println("[0] Quit");
 
             while (!scanner.hasNextInt()) {
@@ -32,12 +36,24 @@ public class MainMenu {
                     peekNextPatientMenu();
                     break;
                 case 3:
-                    addNewPatientMenu();
+                    addRandomPatientMenu();
+                    break;
+                case 4:
+                    addCustomPatientMenu();
                     break;
                 case 0:
                     return;
             }
         }
+    }
+
+    private void addRandomPatientMenu() {
+        Patient patient = patientGenerator.get();
+
+        System.out.println("Adding random patient to queue:");
+        System.out.println(patient);
+
+        hospitalQueueService.add(patient);
     }
 
     private void peekNextPatientMenu() {
@@ -51,7 +67,7 @@ public class MainMenu {
         System.out.println("Removed the next patient from the queue.");
     }
 
-    private void addNewPatientMenu() {
+    private void addCustomPatientMenu() {
         PatientCreatorMenu patientCreatorMenu = new PatientCreatorMenu(hospitalQueueService);
         patientCreatorMenu.addNewPatientMenu();
     }
