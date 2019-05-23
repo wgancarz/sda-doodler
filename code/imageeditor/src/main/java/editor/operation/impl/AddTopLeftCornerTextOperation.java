@@ -9,11 +9,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class AddTopLeftCornerTextOperation implements Operation {
-    private Logger logger = LogManager.getLogger(AddTopLeftCornerTextOperation.class);
-
     String text;
     Color color;
     Integer fontSize;
+    private Logger logger = LogManager.getLogger(AddTopLeftCornerTextOperation.class);
 
     @Override
     public void perform(BufferedImage image) throws IncorrectParametersException {
