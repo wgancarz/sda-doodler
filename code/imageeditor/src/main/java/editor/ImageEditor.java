@@ -1,8 +1,10 @@
 package editor;
 
+import editor.exception.InvalidParametersException;
 import editor.history.HistoryEntry;
 import editor.operation.Operation;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +28,7 @@ public class ImageEditor {
     }
 
     public void loadImage(String filename) {
-        if (filename != null && !filename.isEmpty()) {
+        if (StringUtils.isEmpty(filename)) {
             try {
                 imageTemp = ImageIO.read(new File(filename));
                 logger.info("Loaded file from pathstring: " + filename);
@@ -57,7 +59,7 @@ public class ImageEditor {
         } else {
             HistoryEntry previousEntry = history.pop();
             imageTemp = previousEntry.getPreviousImage();
-            logger.info("Undone operation: " + previousEntry.getCurrentOperation());
+            logger.info("Undone operation: " + previousEntry.getOperation());
         }
     }
 
@@ -65,13 +67,13 @@ public class ImageEditor {
         HistoryEntry newHistoryEntry = new HistoryEntry();
 
         newHistoryEntry.setPreviousImage(getTempImageCopy());
-        newHistoryEntry.setCurrentOperation(operation);
+        newHistoryEntry.setOperation(operation);
 
         history.push(newHistoryEntry);
 
         try {
             operation.perform(imageTemp);
-        } catch (editor.exception.IncorrectParametersException e) {
+        } catch (InvalidParametersException e) {
             e.printStackTrace();
         }
     }

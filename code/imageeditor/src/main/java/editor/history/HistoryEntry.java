@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public class HistoryEntry {
     BufferedImage previousImage;
-    Operation currentOperation;
+    Operation operation;
 
     public BufferedImage getPreviousImage() {
         return previousImage;
@@ -16,11 +16,11 @@ public class HistoryEntry {
         this.previousImage = previousImage;
     }
 
-    public Operation getCurrentOperation() {
-        return currentOperation;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setCurrentOperation(Operation currentOperation) {
-        this.currentOperation = currentOperation;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 }
