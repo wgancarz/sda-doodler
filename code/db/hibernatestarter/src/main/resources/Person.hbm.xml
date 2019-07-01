@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pl.sda.domain">
+    <class name="Person" table="PERSON">
+        <id name="id" column="ID" type="java.lang.Integer">
+            <generator class="identity"/>
+        </id>
+        <property name="firstName" column="first_name" type="java.lang.String" not-null="true"/>
+        <property name="lastName" column="last_name" type="java.lang.String" not-null="true"/>
+        <component name="address">
+            <property name="street" type="java.lang.String" not-null="true" />
+            <property name="city" type="java.lang.String" />
+            <property name="code" type="java.lang.String" not-null="true" length="20"/>
+        </component>
+    </class>
+</hibernate-mapping>
